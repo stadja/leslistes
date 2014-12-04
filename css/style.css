@@ -1,0 +1,17 @@
+.crossed{
+    color: grey;
+    text-decoration: line-through;
+}
+.header{
+    border-bottom: 1px solid;
+    font-weight: 600px;
+}
+
+label{
+    font-weight: normal;
+}
+
+label, .checkbox, .radio {
+	line-height: 1em;
+	padding-top: 0.5em;
+}
