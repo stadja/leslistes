@@ -35,7 +35,22 @@ if (typeof console == 'undefined') {
 }
 
 (function() {
-    var app = angular.module('Courses', ['Controllers']);
+    var app = angular.module('Courses', ['ngRoute', 'Controllers']);
+
+    app.config(['$routeProvider',
+
+        function($routeProvider) {
+            $routeProvider.
+            when('/list/:listId', {
+                controller: 'AppController',
+                controllerAs: 'app',
+                templateUrl: 'templates/list.html'
+            }).
+            otherwise({
+                redirectTo: '/list/courses'
+            });
+        }
+    ]);
 
     app.directive('ngFocus', function() {
         return function(scope, element, attrs) {

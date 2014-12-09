@@ -22,46 +22,7 @@
   </head>
   <body>
     <div class="container">
-      <nav class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Les listes</a>
-          <p class="navbar-text">{{app.connected ? 'Connect&eacute;' : 'Pas connect&eacute;'}}</p>
-        </div>
-      </nav><!-- /navbar -->
-
-              <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form name="form" class="form-inline">
-                            <input class="form-control" ng-repeat="(id, label) in app.model" ng-model="app.newElement[id]" type="text" placeholder="{{label}}" ></input>
-                            <button class="btn btn-primary" ng-click="app.addNewElement()">+</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="row header">
-                    <div class="col-xs-1">
-                    </div>
-                    <div ng-repeat="(id, label) in app.model" class="col-xs-5" ng-class="{'col-xs-4':!$index, 'col-xs-2':$index}" ng-bind-html="app.trustAsHtml(label)"></div>
-                </div>
-                <div class="row" ng-repeat="elem in app.list">
-                    <div class="col-xs-1">
-                      <label class="checkbox" for="checkbox1">
-                        <input type="checkbox" id="elem-{{$index}}" ng-model="elem.done" ng-change="app.save()" flat-checkbox>
-                      </label>
-
-                    </div>
-                    
-                    <label ng-repeat="(id, label) in app.model" for="elem-{{$parent.$index}}" ng-class="{crossed:elem.done, 'col-xs-4':!$index, 'col-xs-2':$index}">
-                        {{elem[id]}}
-                    </label>
-                    <div class="col-xs-1">
-                        <button ng-show="elem.done" class="btn btn-xs btn-danger" ng-click="app.removeElement(elem)">X</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <ng-view></ng-view>
     </div>
     <!-- /.container -->
 
@@ -73,7 +34,8 @@
     <script src="js/flat-ui.min.js"></script>
 
     <script src="http://cdn.rawgit.com/jpillora/xdomain/gh-pages/dist/0.6/xdomain.js" slave="http://stadja.net:81/proxy.html"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
     <script src='scripts/app.js' type='text/javascript'></script>
     <script src='scripts/controllers/AppController.js' type='text/javascript'></script>
     <script src='scripts/models/Abstract.js' type='text/javascript'></script>
