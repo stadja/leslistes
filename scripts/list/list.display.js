@@ -1,10 +1,14 @@
 (function() {
-    var app = angular.module('Controllers', ['Models']);
+    var app = angular.module('listModule');
 
-    app.controller('AppController', ['$scope', '$sce', '$interval', 'Listes', '$route',
+    app.controller('ListDisplayController', ['$scope', '$sce', '$interval', 'Listes', '$route',
         function($scope, $sce, $interval, Listes, $route) {
             var scope = $scope;
             var controller = this;
+
+            controller.emitConnectionStatus = function(isConnected) {
+                scope.$emit('connectionStatusChange', isConnected);
+            };
 
             controller.initValues = function(values) {
                 if (!values) {
@@ -76,10 +80,10 @@
                         controller.save();
                     }
 
-                    controller.connected = true;
+                    controller.emitConnectionStatus(true);
 
                 }, function() {
-                    controller.connected = false;
+                    controller.emitConnectionStatus(false);
                 });
             }
 
@@ -97,7 +101,7 @@
                         controller.load();
                     }, 4000);
                 }, function() {
-                    controller.connected = false;
+                    controller.emitConnectionStatus(false);
                     controller.intervalSaving = $interval(function() {
                         controller.save();
                     }, 4000);
@@ -108,6 +112,10 @@
             controller.activate = function(listId) {
                 controller.listId = listId;
                 controller.connected = false;
+
+                scope.$on('connectionStatusChange', function(event, isConnected) {
+                    controller.connected = isConnected;
+                })
 
                 controller.listes = new Listes(controller.listId+'.json');
                 controller.storageId = controller.listId+'-';
@@ -126,9 +134,7 @@
                 controller.intervalSaving = false;
             }
 
-            if ($route.current) {
-                controller.activate($route.current.params.listId);
-            }
+            controller.activate($route.current.params.listId);
 
         }
     ]);

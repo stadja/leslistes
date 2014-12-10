@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('Models');
+    var app = angular.module('modelModule');
 
     app.factory('Listes',
         ['Abstract', 'DreamFactory', '$sce', function(Abstract, DreamFactory, $sce) {

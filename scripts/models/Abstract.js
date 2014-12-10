@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('Models', ['ServiceDreamFactoryBeta']);
+    var app = angular.module('modelModule', ['serviceDreamFactoryBeta']);
 
     app.factory('Abstract', ['DreamFactory',
         function(DreamFactory) {

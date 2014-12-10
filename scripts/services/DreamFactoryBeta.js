@@ -1,7 +1,7 @@
 // http://wemadeyoulook.at/en/blog/implementing-basic-http-authentication-http-requests-angular/
 (function() {
 
-    var app = angular.module('ServiceDreamFactoryBeta', []);
+    var app = angular.module('serviceDreamFactoryBeta', []);
 
     app.service('DreamFactory', ['$http', function DreamFactory($http) {
 

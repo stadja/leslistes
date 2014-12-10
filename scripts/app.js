@@ -35,14 +35,25 @@ if (typeof console == 'undefined') {
 }
 
 (function() {
-    var app = angular.module('Courses', ['ngRoute', 'Controllers']);
+    var app = angular.module('courseModule', ['ngRoute', 'listModule']);
+
+    app.controller('AppController', [
+        function() {
+           
+        }
+    ]);
 
     app.config(['$routeProvider',
 
         function($routeProvider) {
             $routeProvider.
+            when('/list/new', {
+                controller: 'ListCreateController',
+                controllerAs: 'app',
+                templateUrl: 'templates/createList.html'
+            }).
             when('/list/:listId', {
-                controller: 'AppController',
+                controller: 'ListDisplayController',
                 controllerAs: 'app',
                 templateUrl: 'templates/list.html'
             }).

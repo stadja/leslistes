@@ -10,7 +10,9 @@
             <div class="col-xs-12">
                 <form name="form" class="form-inline">
                     <input class="form-control" ng-repeat="(id, label) in app.model" ng-model="app.newElement[id]" type="text" placeholder="{{label}}" ></input>
-                    <button class="btn btn-primary" ng-click="app.addNewElement()">+</button>
+                    <button class="btn btn-primary" ng-click="app.addNewElement()">
+                        <span class="fui-plus"></span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -30,7 +32,9 @@
                 {{elem[id]}}
             </label>
             <div class="col-xs-1">
-                <button ng-show="elem.done" class="btn btn-xs btn-danger" ng-click="app.removeElement(elem)">X</button>
+                <button ng-show="elem.done" class="btn btn-xs btn-danger" ng-click="app.removeElement(elem)">
+                    <span class="fui-cross"></span>
+                </button>
             </div>
         </div>
     </div>
