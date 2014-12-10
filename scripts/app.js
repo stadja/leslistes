@@ -35,31 +35,11 @@ if (typeof console == 'undefined') {
 }
 
 (function() {
-    var app = angular.module('courseModule', ['ngRoute', 'listModule']);
+    var app = angular.module('listApp', ['listModule']);
 
     app.controller('AppController', [
         function() {
            
-        }
-    ]);
-
-    app.config(['$routeProvider',
-
-        function($routeProvider) {
-            $routeProvider.
-            when('/list/new', {
-                controller: 'ListCreateController',
-                controllerAs: 'app',
-                templateUrl: 'templates/createList.html'
-            }).
-            when('/list/:listId', {
-                controller: 'ListDisplayController',
-                controllerAs: 'app',
-                templateUrl: 'templates/list.html'
-            }).
-            otherwise({
-                redirectTo: '/list/courses'
-            });
         }
     ]);
 
@@ -87,5 +67,14 @@ if (typeof console == 'undefined') {
             }
         };
     }]);
+
+    app.directive('ngPlaceholder', function() {
+        return function(scope, element, attrs) {
+            var e = document.createElement('div');
+            e.innerHTML = attrs.ngPlaceholder;
+            var decodedHtml = e.childNodes[0].nodeValue;
+            element.attr('placeholder', decodedHtml);
+        }
+    });
 
 })()

@@ -15,3 +15,13 @@ label, .checkbox, .radio {
 	line-height: 1em;
 	padding-top: 0.5em;
 }
+
+.navbar-unread.online {
+	width: 18px;
+	height: 18px;
+}
+.navbar-unread.offline {
+	width: 18px;
+	height: 18px;
+	background-color: #ec7063;
+}
