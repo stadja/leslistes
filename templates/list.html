@@ -19,14 +19,16 @@
     <div class="col-xs-12">
         <div class="row row-content" id="addNew">
             <h4>Nouvel &eacute;l&eacute;ment de la liste</h4>
-            <div ng-class="{'col-sm-4':!$index, 'col-sm-2':$index}" ng-repeat="(id, label) in app.model">
-                <input class="form-control" ng-model="app.newElement[id]" type="text" ng-placeholder="{{label}}" ></input>
-            </div>
-            <div class="col-xs-1">
-                <button class="btn btn-primary" ng-click="app.addNewElement()">
-                    <span class="fui-plus"></span>Ajouter
-                </button>
-            </div>
+            <form ng-submit="app.addNewElement()">
+                <div ng-class="{'col-sm-4':!$index, 'col-sm-2':$index}" ng-repeat="(id, label) in app.model">
+                    <input class="form-control" ng-model="app.newElement[id]" type="text" ng-placeholder="{{label}}" ></input>
+                </div>
+                <div class="col-xs-1">
+                    <button type='submit' class="btn btn-primary">
+                        <span class="fui-plus"></span>Ajouter
+                    </button>
+                </div>
+            </form>
         </div>
         <div class="row">
             <h4></h4>
