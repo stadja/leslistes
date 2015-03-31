@@ -13,6 +13,17 @@
     "build": "npm run uglify",
     "postbuild": "npm run update:manifest",
     "build:watch": "watch 'npm run build' . --wait=5"
-  }
+  },
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stadja/leslistes.git"
+  },
+  "author": "stadja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stadja/leslistes/issues"
+  },
+  "homepage": "https://github.com/stadja/leslistes"
 }
-
