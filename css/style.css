@@ -1,3 +1,7 @@
+body {
+	background-color: #48c9b0;
+}
+
 .crossed{
     color: grey;
     text-decoration: line-through;
@@ -24,4 +28,57 @@ label, .checkbox, .radio {
 	width: 18px;
 	height: 18px;
 	background-color: #ec7063;
+}
+
+.row-content {
+	margin-bottom: 30px;
+}
+
+.row-list {
+	border-bottom: thin #c0c1c2 dashed;
+}
+
+.row-list:last-child {
+	border-bottom: none;
+}
+
+.cell-list {
+	margin-top: 10px;
+	margin-bottom: 12px;
+	padding: 0px;
+	line-height: 20px;
+}
+
+@-webkit-keyframes spinnerRotate
+{
+    from{-webkit-transform:rotate(0deg);}
+    to{-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes spinnerRotate
+{
+    from{-moz-transform:rotate(0deg);}
+    to{-moz-transform:rotate(360deg);}
+}
+@-ms-keyframes spinnerRotate
+{
+    from{-ms-transform:rotate(0deg);}
+    to{-ms-transform:rotate(360deg);}
+}
+.fui-gear {
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spinnerRotate;
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spinnerRotate;
+    -ms-animation-duration: 1s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+}
+
+.fui-cross {
+	color: #d9534f;
 }

@@ -7,11 +7,9 @@
                 var listes = new Abstract();
 
                 var data = {
-                    apiFile: 'filestadja',
                     fileContainer: 'courses',
                     filePath: filePath,
                     values: false,
-                    tableValues: false,
                     loading: false,
                 };
                 listes.setData(data);
@@ -30,6 +28,26 @@
                 listes.save = function(callback, error) {
                     listes.loading = true;
                     listes.replaceFile(listes.fileContainer, listes.filePath, listes.values, function(result) {
+                        listes.loading = false;
+                        if (callback) {
+                            callback(listes.values);
+                        }
+                    }, error);
+                };
+
+                listes.create = function(callback, error) {
+                    listes.loading = true;
+                    listes.createFile(listes.fileContainer, listes.filePath, listes.values, function(result) {
+                        listes.loading = false;
+                        if (callback) {
+                            callback(listes.values);
+                        }
+                    }, error);
+                };
+
+                listes.createListe = function(callback, error) {
+                    listes.loading = true;
+                    listes.postToWebService('create_liste', listes.values, function(result) {
                         listes.loading = false;
                         if (callback) {
                             callback(listes.values);

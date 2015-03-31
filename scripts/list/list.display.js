@@ -21,6 +21,7 @@
                 controller.lastListLoaded = controller.list.slice(0);
                 controller.model = values.model;
                 controller.listTitle = values.title;
+                controller.author = values.author;
 
                 var json = controller.getCurrentJson(controller.list);
                 localStorage.setItem(controller.storageId + 'list', json);
@@ -32,10 +33,22 @@
 
             controller.addNewElement = function() {
                 var elem = {};
+                var i = 0;
+                var empty = false;
                 angular.forEach(controller.model, function(obj, key) {
+                    if (i == 0) {
+                        if (!controller.newElement[key]) {
+                            empty = true;
+                        }
+                        i++;
+                    }
                     elem[key] = controller.newElement[key];
                     controller.newElement[key] = '';
                 });
+            
+                if (empty) {
+                    return false;
+                }
                 controller.addElement(elem);
             }
 
@@ -55,7 +68,8 @@
                 var data = {
                     data: list,
                     model: controller.model,
-                    title: controller.listTitle
+                    title: controller.listTitle,
+                    author: controller.author,
                 };
                 var json = angular.toJson(data);
                 return json;
@@ -66,7 +80,9 @@
                     var jsonlist = controller.getCurrentJson(controller.list);
                     var jsonLastListLoaded = controller.getCurrentJson(controller.lastListLoaded);
                     var jsonValues = angular.toJson(values);
-                    if (jsonLastListLoaded != jsonValues) {
+                    if (!controller.lastListLoaded) {
+                        controller.initValues(values);
+                    } else if (jsonLastListLoaded != jsonValues) {
                         if (jsonLastListLoaded == jsonlist) {
                             controller.initValues(values);
                         } else {
@@ -111,19 +127,21 @@
 
             controller.activate = function(listId) {
                 controller.listId = listId;
+                controller.newElement = [];
                 controller.connected = false;
 
                 scope.$on('connectionStatusChange', function(event, isConnected) {
                     controller.connected = isConnected;
                 })
 
-                controller.listes = new Listes(controller.listId+'.json');
+                controller.listes = new Listes(controller.listId);
                 controller.storageId = controller.listId+'-';
 
                 controller.list = '';
 
-                if (localStorage.getItem(controller.storageId + 'list')) {
-                    controller.initValues(angular.fromJson(localStorage.getItem(controller.storageId + 'list')));
+                var local = localStorage.getItem(controller.storageId + 'list');
+                if (angular.fromJson(local)) {
+                    controller.initValues(angular.fromJson(local));
                 }
 
                 controller.load();
@@ -132,9 +150,15 @@
                 }, 4000);
 
                 controller.intervalSaving = false;
+
+                $scope.$on('$destroy', function iVeBeenDismissed() {
+                    $interval.cancel(controller.intervalLoading);
+                    $interval.cancel(controller.intervalSaving);
+                })
             }
 
-            controller.activate($route.current.params.listId);
+            var list = $route.current.params.listId
+            controller.activate(list);
 
         }
     ]);

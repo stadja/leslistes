@@ -1,0 +1,14 @@
+ExpiresActive On
+ExpiresByType image/gif "access plus 30 days"
+ExpiresByType image/jpg "access plus 30 days"
+ExpiresByType image/jpeg "access plus 30 days"
+ExpiresByType image/png "access plus 30 days"
+ExpiresByType image/x-icon "access plus 30 days"
+ExpiresByType application/x-font-woff "access plus 7 days"
+ExpiresByType text/css "access plus 7 days"
+ExpiresByType text/javascript "access plus 14 days"
+ExpiresByType text/plain "access plus 14 days"
+ExpiresByType application/x-javascript "access plus 14 days"
+ExpiresByType application/javascript "access plus 14 days"
+
+AddType text/cache-manifest .manifest

@@ -16,7 +16,7 @@ String.prototype.sansAccent = function(){
     }
 
     return str;
-}
+};
 
 if (typeof console == 'undefined') {
     console = {};
@@ -33,6 +33,23 @@ if (typeof console == 'undefined') {
         alert('trace');
     };
 }
+
+function hideAddressBar()
+{
+  if(!window.location.hash)
+  {
+      if(document.height < window.outerHeight)
+      {
+          document.body.style.height = (window.outerHeight + 50) + 'px';
+      }
+ 
+      setTimeout( function(){ window.scrollTo(0, 1); }, 50 );
+  }
+}
+ 
+window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
+window.addEventListener("orientationchange", hideAddressBar );
+
 
 (function() {
     var app = angular.module('listApp', ['listModule']);
@@ -74,7 +91,7 @@ if (typeof console == 'undefined') {
             e.innerHTML = attrs.ngPlaceholder;
             var decodedHtml = e.childNodes[0].nodeValue;
             element.attr('placeholder', decodedHtml);
-        }
+        };
     });
 
-})()
+})();

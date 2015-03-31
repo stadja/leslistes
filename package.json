@@ -1,0 +1,18 @@
+{
+  "name": "courses",
+  "devDependencies": {
+    "watch": "latest",
+    "browserify": "latest",
+    "uglifyjs": "latest"
+  },
+  "scripts": {
+    "update:manifest": "sed -i \"2s/.*/#`date`/\" cache.manifest",
+    "browserify": "browserify main.js -o bundle.js",
+    "uglify": "uglifyjs bundle.js -o bundle.min.js",
+    "prebuild": "npm run browserify",
+    "build": "npm run uglify",
+    "postbuild": "npm run update:manifest",
+    "build:watch": "watch 'npm run build' . --wait=5"
+  }
+}
+

@@ -30,11 +30,35 @@
             functionCalled(apiName, apiAction, args, success, error);
         };
 
+        this.post = function(apiName, apiAction, args, success, error) {
+            var service = args.service;
+            args.service = null;
+            $http.post(dsp_url+'/'+apiName+'/'+service, args)
+            .success(function(data, status, headers, config) {
+                success(data);
+            }).error(function(data, status, headers, config) {
+                error();
+            });
+
+        };
+
         this.getFile = function(apiName, apiAction, filePath, success, error) {
             $http.get(dsp_url+'/'+apiName+'/'+filePath,
                 {
                 }
             ).success(function(data, status, headers, config) {
+                success(data);
+            }).error(function(data, status, headers, config) {
+                error();
+            });
+
+        };
+
+        this.createFile = function(apiName, apiAction, args, success, error) {
+            filePath = args.path;
+            content = args.content;
+            $http.post(dsp_url+'/'+apiName+'/'+filePath, content)
+            .success(function(data, status, headers, config) {
                 success(data);
             }).error(function(data, status, headers, config) {
                 error();

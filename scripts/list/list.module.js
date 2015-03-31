@@ -10,13 +10,13 @@
                 controllerAs: 'app',
                 templateUrl: 'templates/listCreate.html'
             }).
-            when('/list/:listId', {
+            when('/list/:listId*', {
                 controller: 'ListDisplayController',
                 controllerAs: 'app',
                 templateUrl: 'templates/list.html'
             }).
             otherwise({
-                redirectTo: '/list/courses'
+                redirectTo: '/list/new'
             });
         }
     ]);

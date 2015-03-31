@@ -5,6 +5,66 @@
 </nav>
 <div class="row">
     <div class="col-xs-12">
-        
+	    <form name="form" class="form-inline">
+	        <div class="row row-content">
+	            <div class="col-xs-12">
+					<h4>Nom de la liste</h4>
+					<input tabindex="1" required class="form-control input-hg" ng-model="app.title" type="text" placeholder="ex: Mes courses..." ></input>
+				</div>
+	        </div>
+
+	        <div class="row row-content">
+	            <div class="col-xs-12">
+					<h4>Choisissez le nom de vos colonnes (ex: Produit, Quantité) <small ng-class="{'label-danger' : !app.model.length}">Une colonne au minimum !</small></h4>
+	                    <button style="float:right;" tabindex="{{app.model.length+2}}" type="" value="add" class="btn btn-primary" ng-click="app.addColumn()">
+	                        <span class="fui-plus"></span>Ajouter une colonne
+	                    </button>
+	                    <div class="input-group col-sm-3" ng-repeat="label in app.model track by $index" >
+	            			<input tabindex="{{$index+2}}" required class="form-control" ng-model="app.model[$index]" type="text" ng-placeholder="Nom de la colonne {{$index+1}}" ></input>
+	        				<span class="input-group-btn">
+		        				<button class="btn btn-danger" ng-click="app.removeColumn($index)">
+				                    <span class="fui-cross"></span>
+				                </button>
+			                </span>
+	                    </div>
+
+	                    
+				</div>
+	        </div>
+			
+	        <div class="row row-content">
+	            <div class="col-xs-12">
+					<h4>Email de confirmation</h4>
+						<input tabindex="{{app.model.length+3}}" class="form-control" ng-model="app.author" required type="email" placeholder="email" ></input>
+				</div>
+	        </div>
+
+			<div class="row row-content">
+	            <div class="col-xs-12">
+					<h4></h4>
+					<input tabindex="{{app.model.length+4}}" ng-disabled="!form.$valid || !app.model.length || app.creating" type="submit" value="On envoie" class="btn btn-hg btn-primary" ng-click="app.createFile()">
+		                <span class="" ng-class="{'fui-check': app.created,'fui-gear': (app.creating && !app.created),'fui-lock': ((!form.$valid || !app.model.length) && !app.creating), 'fui-arrow-right': (form.$valid && app.model.length && !app.creating)}"></span><span>Création de la liste !</span>
+		            </input>
+	            </div>
+			</div>
+		</form>
     </div>
+			<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+			  <div class="modal-dialog modal-lgbackdrop">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title" id="myModalLabel">La liste est créée !</h4>
+			      </div>
+			      <div class="modal-body">
+			        La liste "<strong>{{app.title}}</strong>" est crée et son adresse a été envoyé par email à <strong>{{app.author}}</strong>
+			      </div>
+			      <div class="modal-footer">
+			        <button ng-click="app.restart()" class="btn btn-primary">Créer une nouvelle liste</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 </div>
+
+
+

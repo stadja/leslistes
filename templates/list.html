@@ -16,38 +16,38 @@
 
 
 </nav>
-<div class="row">
     <div class="col-xs-12">
-        <div class="row">
-            <div class="col-xs-12">
-                <form name="form" class="form-inline">
-                    <input class="form-control" ng-repeat="(id, label) in app.model" ng-model="app.newElement[id]" type="text" ng-placeholder="{{label}}" ></input>
-                    <button class="btn btn-primary" ng-click="app.addNewElement()">
-                        <span class="fui-plus"></span>
-                    </button>
-                </form>
+        <div class="row row-content" id="addNew">
+            <h4>Nouvel &eacute;l&eacute;ment de la liste</h4>
+            <div ng-class="{'col-sm-4':!$index, 'col-sm-2':$index}" ng-repeat="(id, label) in app.model">
+                <input class="form-control" ng-model="app.newElement[id]" type="text" ng-placeholder="{{label}}" ></input>
             </div>
-        </div>
-        <div class="row header">
             <div class="col-xs-1">
-            </div>
-            <div ng-repeat="(id, label) in app.model" class="col-xs-5" ng-class="{'col-xs-4':!$index, 'col-xs-2':$index}" ng-bind-html="app.trustAsHtml(label)"></div>
-        </div>
-        <div class="row" ng-repeat="elem in app.list">
-            <div class="col-xs-1">
-                <label class="checkbox" for="elem-{{$index}}">
-                    <input type="checkbox" id="elem-{{$index}}" ng-model="elem.done" ng-change="app.save()" flat-checkbox>
-                </label>
-            </div>
-            
-            <label ng-repeat="(id, label) in app.model" for="elem-{{$parent.$index}}" ng-class="{crossed:elem.done, 'col-xs-4':!$index, 'col-xs-2':$index}">
-                {{elem[id]}}
-            </label>
-            <div class="col-xs-1">
-                <button ng-show="elem.done" class="btn btn-xs btn-danger" ng-click="app.removeElement(elem)">
-                    <span class="fui-cross"></span>
+                <button class="btn btn-primary" ng-click="app.addNewElement()">
+                    <span class="fui-plus"></span>Ajouter
                 </button>
             </div>
         </div>
+        <div class="row">
+            <h4></h4>
+            <div class="row header">
+                <div class="col-xs-1">
+                </div>
+                <div ng-repeat="(id, label) in app.model" class="col-xs-5" ng-class="{'col-xs-4':!$index, 'col-xs-2':$index}" ng-bind-html="app.trustAsHtml(label)"></div>
+            </div>
+            <div class="row row-list" ng-repeat="elem in app.list">
+                <label class="checkbox col-xs-1" for="elem-{{$index}}">
+                  <input type="checkbox" id="elem-{{$index}}" ng-model="elem.done" ng-change="app.save()" flat-checkbox>
+                </label>
+
+                <label ng-repeat="(id, label) in app.model" for="elem-{{$parent.$index}}" ng-class="{crossed:elem.done, 'col-xs-4':!$index, 'col-xs-2':$index}" class="cell-list">
+                  {{elem[id]}}
+                </label>
+                <div class="col-xs-1">
+                  <button ng-show="elem.done" class="btn btn-xs btn-danger" ng-click="app.removeElement(elem)">
+                      <span class="fui-cross"></span>
+                  </button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

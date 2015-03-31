@@ -8,7 +8,7 @@
                     records: [],
                     recordTemplateUrl: 'abstract',
                     apiDb: 'stadjadb',
-                    apiFile: 'stadjadb',
+                    apiFile: 'filestadja',
                     tableName: 'abstract',
                     related: null,
                     order: null,
@@ -23,12 +23,44 @@
                 _createRecordFromApi: function(apiRecord) {
                     return apiRecord;
                 },
+                postToWebService: function(service, args, callback, error) {
+                    recordManager = this;
+                    args.service = service+'?is_user_script=true';
+                    args.is_user_script = 'true';
+                    args.path = 'system/script/'+service
+                    DreamFactory.call(
+                        'system/script',
+                        'post',
+                        args,
+                        function(response) {
+                            if (callback) {
+                                callback(response);
+                            }
+                        }, error
+                    );
+                },
                 getFile: function(fileContainer, filePath, callback, error) {
                     recordManager = this;
                     DreamFactory.call(
                         recordManager.apiFile,
                         'getFile',
                         fileContainer+'/'+filePath,
+                        function(response) {
+                            if (callback) {
+                                callback(response);
+                            }
+                        }, error
+                    );
+                },
+                createFile: function(fileContainer, filePath, content, callback, error) {
+                    recordManager = this;
+                    DreamFactory.call(
+                        recordManager.apiFile,
+                        'createFile',
+                        {
+                            path: fileContainer+'/'+filePath,
+                            content: content
+                        },
                         function(response) {
                             if (callback) {
                                 callback(response);
